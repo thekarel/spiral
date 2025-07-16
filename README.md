@@ -66,7 +66,7 @@ $ npm install -g @thekarel/spiral
 $ spiral COMMAND
 running command...
 $ spiral (--version)
-@thekarel/spiral/0.0.2 darwin-x64 node-v22.13.1
+@thekarel/spiral/0.0.2 linux-x64 node-v20.19.3
 $ spiral --help [COMMAND]
 USAGE
   $ spiral COMMAND
@@ -77,7 +77,6 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`spiral hack ID`](#spiral-hack-id)
 * [`spiral help [COMMAND]`](#spiral-help-command)
 * [`spiral plugins`](#spiral-plugins)
 * [`spiral plugins add PLUGIN`](#spiral-plugins-add-plugin)
@@ -89,30 +88,6 @@ USAGE
 * [`spiral plugins uninstall [PLUGIN]`](#spiral-plugins-uninstall-plugin)
 * [`spiral plugins unlink [PLUGIN]`](#spiral-plugins-unlink-plugin)
 * [`spiral plugins update`](#spiral-plugins-update)
-* [`spiral ship`](#spiral-ship)
-
-## `spiral hack ID`
-
-Start working on a ticket
-
-```
-USAGE
-  $ spiral hack ID [--dry]
-
-ARGUMENTS
-  ID  The ticket ID, e.g. ABC-123
-
-FLAGS
-  --dry  Show the shell command to run but do not execute it. Will still try to read from Linear.
-
-DESCRIPTION
-  Start working on a ticket
-
-EXAMPLES
-  $ spiral hack
-```
-
-_See code: [src/commands/hack.ts](https://github.com/thekarel/spiral/blob/v0.0.2/src/commands/hack.ts)_
 
 ## `spiral help [COMMAND]`
 
@@ -423,29 +398,6 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/update.ts)_
-
-## `spiral ship`
-
-Start working on a ticket
-
-```
-USAGE
-  $ spiral ship [--dry] [--edit] [--scope <value>]
-
-FLAGS
-  --dry            Show the shell command to run but do not execute it. Will still try to read from Linear.
-  --[no-]edit      Edit the commit message before committing.
-  --scope=<value>  [default: fix] Scope of the commit, e.g. "feature" or "fix(Admin)", will be used as the commit
-                   message prefix.
-
-DESCRIPTION
-  Start working on a ticket
-
-EXAMPLES
-  $ spiral ship
-```
-
-_See code: [src/commands/ship.ts](https://github.com/thekarel/spiral/blob/v0.0.2/src/commands/ship.ts)_
 <!-- commandsstop -->
 
 ```
