@@ -6,6 +6,7 @@
   "bin": {
     "spiral": "./bin/run.js"
   },
+  "private": false,
   "bugs": "https://github.com/thekarel/spiral/issues",
   "dependencies": {
     "@linear/sdk": "^51.1.0",
