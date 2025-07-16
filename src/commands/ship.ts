@@ -8,7 +8,7 @@ import {getLinearClient} from '../get-linear-client.js'
 
 export default class Ship extends Command {
   static override args = {}
-  static override description = 'Start working on a ticket'
+  static override description = 'Ship your work to the remote repo (git ship)'
   static override examples = ['<%= config.bin %> <%= command.id %>']
   static override flags = {
     dry: Flags.boolean({

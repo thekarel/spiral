@@ -10,8 +10,8 @@ export default class Hack extends Command {
       required: true,
     }),
   }
-  static override description = 'Start working on a ticket'
-  static override examples = ['<%= config.bin %> <%= command.id %>']
+  static override description = 'Create a new branch for a ticket (git hack)'
+  static override examples = ['<%= config.bin %> <%= command.id %> ABC-123']
   static override flags = {
     dry: Flags.boolean({
       default: false,

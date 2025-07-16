@@ -8,55 +8,66 @@
 
 <!-- toc -->
 * [Spiral](#spiral)
+* [Installation](#installation)
+* [Hack](#hack)
+* [Ship](#ship)
 * [API Key](#api-key)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
 
-The CLI has two commands:
+# Installation
 
-1. `spiral hack abc-123`: Create a new branch from a Linear ticket
-2. `spiral ship`: Pre fill the commit message with the ticket information
+```
+npm install -g @thekarel/spiral
+```
 
-## What?
+## What is this?
 
-This tools slightly simplifies a very specific and repetitive workflow:
+This tool slightly simplifies a very specific and repetitive workflow:
 
 1. Creating a new, clean branch from a Linear ticket using Git Town
 2. Work...
 3. Fill the commit message with the ticket information from Linear
 4. Publish the changes in a sane way using Git Town
 
-If you've been doing `git hack` and `git town` often you know what I mean. If not, you probably should try it.
+If you've been doing `git hack` and `git town` often you know what I mean.
 
-At the moment the format of the branch name and the commit message structure are hard coded,
-and so are the commands this CLI runs.
+The CLI has two commands:
+
+1. `spiral hack abc-123`: Create a new branch from a Linear ticket using `git town hack`
+2. `spiral ship`: Pre-fill the commit message with the ticket information and run `git town ship`
+
+The format of the branch name and the commit message structure are hard coded, and so are the commands this CLI runs.
+This might change in the future.
 
 Context:
 
 - Linear: https://linear.app/
 - Git Town: https://git-town.com/
 
-## Hack
+# Hack
 
 The `hack` command creates a new branch from a Linear ticket, using Git Town.
 The format of the branch name is `ticket-number-title-of-your-ticket`, for example `abc-123-exciting-the-new-feature`.
 
 Keystrokes saved: several!
 
-## Ship
+# Ship
 
-The `ship` command pre fills the commit message with the ticket information,
+The `ship` command pre-fills the commit message with the ticket information,
 allows you to edit the message and then runs `git town ship`.
 
-At the moment
+The goal is to avoid copy-pasting all the bits and manually formatting the commit message into the expected format.
+
+Productivity increase: not insignificant!
 
 # API Key
 
 Export your API key as `LINEAR_API_KEY`.
 
-You can create an API key in your Linear account settings under Security & access.
-Make sure you only add READ permissions.
+You can create one in your Linear account settings under Security & access.
+Only add READ permissions.
 
 # Usage
 
@@ -66,7 +77,7 @@ $ npm install -g @thekarel/spiral
 $ spiral COMMAND
 running command...
 $ spiral (--version)
-@thekarel/spiral/0.0.2 linux-x64 node-v20.19.3
+@thekarel/spiral/0.0.2 darwin-x64 node-v22.13.1
 $ spiral --help [COMMAND]
 USAGE
   $ spiral COMMAND
@@ -77,17 +88,32 @@ USAGE
 # Commands
 
 <!-- commands -->
+* [`spiral hack ID`](#spiral-hack-id)
 * [`spiral help [COMMAND]`](#spiral-help-command)
-* [`spiral plugins`](#spiral-plugins)
-* [`spiral plugins add PLUGIN`](#spiral-plugins-add-plugin)
-* [`spiral plugins:inspect PLUGIN...`](#spiral-pluginsinspect-plugin)
-* [`spiral plugins install PLUGIN`](#spiral-plugins-install-plugin)
-* [`spiral plugins link PATH`](#spiral-plugins-link-path)
-* [`spiral plugins remove [PLUGIN]`](#spiral-plugins-remove-plugin)
-* [`spiral plugins reset`](#spiral-plugins-reset)
-* [`spiral plugins uninstall [PLUGIN]`](#spiral-plugins-uninstall-plugin)
-* [`spiral plugins unlink [PLUGIN]`](#spiral-plugins-unlink-plugin)
-* [`spiral plugins update`](#spiral-plugins-update)
+* [`spiral ship`](#spiral-ship)
+
+## `spiral hack ID`
+
+Start working on a ticket
+
+```
+USAGE
+  $ spiral hack ID [--dry]
+
+ARGUMENTS
+  ID  The ticket ID, e.g. ABC-123
+
+FLAGS
+  --dry  Show the shell command to run but do not execute it. Will still try to read from Linear.
+
+DESCRIPTION
+  Start working on a ticket
+
+EXAMPLES
+  $ spiral hack
+```
+
+_See code: [src/commands/hack.ts](https://github.com/thekarel/spiral/blob/v0.0.2/src/commands/hack.ts)_
 
 ## `spiral help [COMMAND]`
 
@@ -109,297 +135,26 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.31/src/commands/help.ts)_
 
-## `spiral plugins`
+## `spiral ship`
 
-List installed plugins.
+Start working on a ticket
 
 ```
 USAGE
-  $ spiral plugins [--json] [--core]
+  $ spiral ship [--dry] [--edit] [--scope <value>]
 
 FLAGS
-  --core  Show core plugins.
-
-GLOBAL FLAGS
-  --json  Format output as json.
+  --dry            Show the shell command to run but do not execute it. Will still try to read from Linear.
+  --[no-]edit      Edit the commit message before committing.
+  --scope=<value>  [default: fix] Scope of the commit, e.g. "feature" or "fix(Admin)", will be used as the commit
+                   message prefix.
 
 DESCRIPTION
-  List installed plugins.
+  Start working on a ticket
 
 EXAMPLES
-  $ spiral plugins
+  $ spiral ship
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/index.ts)_
-
-## `spiral plugins add PLUGIN`
-
-Installs a plugin into spiral.
-
-```
-USAGE
-  $ spiral plugins add PLUGIN... [--json] [-f] [-h] [-s | -v]
-
-ARGUMENTS
-  PLUGIN...  Plugin to install.
-
-FLAGS
-  -f, --force    Force npm to fetch remote resources even if a local copy exists on disk.
-  -h, --help     Show CLI help.
-  -s, --silent   Silences npm output.
-  -v, --verbose  Show verbose npm output.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Installs a plugin into spiral.
-
-  Uses npm to install plugins.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  Use the SPIRAL_NPM_LOG_LEVEL environment variable to set the npm loglevel.
-  Use the SPIRAL_NPM_REGISTRY environment variable to set the npm registry.
-
-ALIASES
-  $ spiral plugins add
-
-EXAMPLES
-  Install a plugin from npm registry.
-
-    $ spiral plugins add myplugin
-
-  Install a plugin from a github url.
-
-    $ spiral plugins add https://github.com/someuser/someplugin
-
-  Install a plugin from a github slug.
-
-    $ spiral plugins add someuser/someplugin
-```
-
-## `spiral plugins:inspect PLUGIN...`
-
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ spiral plugins inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN...  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ spiral plugins inspect myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/inspect.ts)_
-
-## `spiral plugins install PLUGIN`
-
-Installs a plugin into spiral.
-
-```
-USAGE
-  $ spiral plugins install PLUGIN... [--json] [-f] [-h] [-s | -v]
-
-ARGUMENTS
-  PLUGIN...  Plugin to install.
-
-FLAGS
-  -f, --force    Force npm to fetch remote resources even if a local copy exists on disk.
-  -h, --help     Show CLI help.
-  -s, --silent   Silences npm output.
-  -v, --verbose  Show verbose npm output.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Installs a plugin into spiral.
-
-  Uses npm to install plugins.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  Use the SPIRAL_NPM_LOG_LEVEL environment variable to set the npm loglevel.
-  Use the SPIRAL_NPM_REGISTRY environment variable to set the npm registry.
-
-ALIASES
-  $ spiral plugins add
-
-EXAMPLES
-  Install a plugin from npm registry.
-
-    $ spiral plugins install myplugin
-
-  Install a plugin from a github url.
-
-    $ spiral plugins install https://github.com/someuser/someplugin
-
-  Install a plugin from a github slug.
-
-    $ spiral plugins install someuser/someplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/install.ts)_
-
-## `spiral plugins link PATH`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ spiral plugins link PATH [-h] [--install] [-v]
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help          Show CLI help.
-  -v, --verbose
-      --[no-]install  Install dependencies after linking the plugin.
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-
-EXAMPLES
-  $ spiral plugins link myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/link.ts)_
-
-## `spiral plugins remove [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ spiral plugins remove [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  PLUGIN...  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ spiral plugins unlink
-  $ spiral plugins remove
-
-EXAMPLES
-  $ spiral plugins remove myplugin
-```
-
-## `spiral plugins reset`
-
-Remove all user-installed and linked plugins.
-
-```
-USAGE
-  $ spiral plugins reset [--hard] [--reinstall]
-
-FLAGS
-  --hard       Delete node_modules and package manager related files in addition to uninstalling plugins.
-  --reinstall  Reinstall all plugins after uninstalling.
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/reset.ts)_
-
-## `spiral plugins uninstall [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ spiral plugins uninstall [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  PLUGIN...  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ spiral plugins unlink
-  $ spiral plugins remove
-
-EXAMPLES
-  $ spiral plugins uninstall myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/uninstall.ts)_
-
-## `spiral plugins unlink [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ spiral plugins unlink [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  PLUGIN...  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ spiral plugins unlink
-  $ spiral plugins remove
-
-EXAMPLES
-  $ spiral plugins unlink myplugin
-```
-
-## `spiral plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ spiral plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/update.ts)_
+_See code: [src/commands/ship.ts](https://github.com/thekarel/spiral/blob/v0.0.2/src/commands/ship.ts)_
 <!-- commandsstop -->
-
-```
-
-```
