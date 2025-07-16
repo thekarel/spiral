@@ -29,7 +29,7 @@ export default class Hack extends Command {
 
     const branch = `${ticket.identifier.toLocaleLowerCase()}-${ticket.title.replaceAll(/\s+/g, '-').toLowerCase()}`
 
-    const command = `git hack ${branch}`
+    const command = `git town hack ${branch}`
     this.log(`The following command ${flags.dry ? 'would' : 'will'} be executed:\n`)
     this.log(command)
 
@@ -41,7 +41,5 @@ export default class Hack extends Command {
     if (result.code !== 0) {
       this.error(result.stderr)
     }
-
-    this.log(`🌻 All done`)
   }
 }

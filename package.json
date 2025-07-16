@@ -1,7 +1,7 @@
 {
   "name": "@thekarel/spiral",
   "description": "A tiny helper for Linear git workflow",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Charles Szilagyi",
   "bin": {
     "spiral": "./bin/run.js"
@@ -13,7 +13,9 @@
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-plugins": "^5",
-    "shelljs": "^0.10.0"
+    "open-editor": "^5.1.0",
+    "shelljs": "^0.10.0",
+    "yoctocolors": "^2.1.1"
   },
   "devDependencies": {
     "@eslint/compat": "^1",
@@ -53,11 +55,7 @@
       "@oclif/plugin-plugins"
     ],
     "topicSeparator": " ",
-    "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
-    }
+    "topics": {}
   },
   "repository": "thekarel/spiral",
   "scripts": {

@@ -1,22 +1,6 @@
 # Spiral
 
-> A tiny helper for Linear git workflow
-
-Offers no less than one feature:
-
-- Running `git town hack <branch-name>` where the branch is the ID + title from Linear
-
-Example:
-
-```sh
-$ spiral hack ABC-123
-```
-
-This will run
-
-```sh
-git town hack abc-123-the-title-of-your-ticket
-```
+> A tiny helper for Linear & Git Town workflow
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@thekarel/spiral.svg)](https://npmjs.org/package/@thekarel/spiral)
@@ -28,6 +12,44 @@ git town hack abc-123-the-title-of-your-ticket
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+
+The CLI has two commands:
+
+1. `spiral hack abc-123`: Create a new branch from a Linear ticket
+2. `spiral ship`: Pre fill the commit message with the ticket information
+
+## What?
+
+This tools slightly simplifies a very specific and repetitive workflow:
+
+1. Creating a new, clean branch from a Linear ticket using Git Town
+2. Work...
+3. Fill the commit message with the ticket information from Linear
+4. Publish the changes in a sane way using Git Town
+
+If you've been doing `git hack` and `git town` often you know what I mean. If not, you probably should try it.
+
+At the moment the format of the branch name and the commit message structure are hard coded,
+and so are the commands this CLI runs.
+
+Context:
+
+- Linear: https://linear.app/
+- Git Town: https://git-town.com/
+
+## Hack
+
+The `hack` command creates a new branch from a Linear ticket, using Git Town.
+The format of the branch name is `ticket-number-title-of-your-ticket`, for example `abc-123-exciting-the-new-feature`.
+
+Keystrokes saved: several!
+
+## Ship
+
+The `ship` command pre fills the commit message with the ticket information,
+allows you to edit the message and then runs `git town ship`.
+
+At the moment
 
 # API Key
 
@@ -44,7 +66,7 @@ $ npm install -g @thekarel/spiral
 $ spiral COMMAND
 running command...
 $ spiral (--version)
-@thekarel/spiral/0.0.1 linux-x64 node-v20.19.3
+@thekarel/spiral/0.0.2 darwin-x64 node-v22.13.1
 $ spiral --help [COMMAND]
 USAGE
   $ spiral COMMAND
@@ -55,6 +77,7 @@ USAGE
 # Commands
 
 <!-- commands -->
+* [`spiral hack ID`](#spiral-hack-id)
 * [`spiral help [COMMAND]`](#spiral-help-command)
 * [`spiral plugins`](#spiral-plugins)
 * [`spiral plugins add PLUGIN`](#spiral-plugins-add-plugin)
@@ -66,6 +89,30 @@ USAGE
 * [`spiral plugins uninstall [PLUGIN]`](#spiral-plugins-uninstall-plugin)
 * [`spiral plugins unlink [PLUGIN]`](#spiral-plugins-unlink-plugin)
 * [`spiral plugins update`](#spiral-plugins-update)
+* [`spiral ship`](#spiral-ship)
+
+## `spiral hack ID`
+
+Start working on a ticket
+
+```
+USAGE
+  $ spiral hack ID [--dry]
+
+ARGUMENTS
+  ID  The ticket ID, e.g. ABC-123
+
+FLAGS
+  --dry  Show the shell command to run but do not execute it. Will still try to read from Linear.
+
+DESCRIPTION
+  Start working on a ticket
+
+EXAMPLES
+  $ spiral hack
+```
+
+_See code: [src/commands/hack.ts](https://github.com/thekarel/spiral/blob/v0.0.2/src/commands/hack.ts)_
 
 ## `spiral help [COMMAND]`
 
@@ -376,6 +423,29 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/update.ts)_
+
+## `spiral ship`
+
+Start working on a ticket
+
+```
+USAGE
+  $ spiral ship [--dry] [--edit] [--scope <value>]
+
+FLAGS
+  --dry            Show the shell command to run but do not execute it. Will still try to read from Linear.
+  --[no-]edit      Edit the commit message before committing.
+  --scope=<value>  [default: fix] Scope of the commit, e.g. "feature" or "fix(Admin)", will be used as the commit
+                   message prefix.
+
+DESCRIPTION
+  Start working on a ticket
+
+EXAMPLES
+  $ spiral ship
+```
+
+_See code: [src/commands/ship.ts](https://github.com/thekarel/spiral/blob/v0.0.2/src/commands/ship.ts)_
 <!-- commandsstop -->
 
 ```
