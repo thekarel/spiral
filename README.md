@@ -19,11 +19,11 @@ git town hack abc-123-the-title-of-your-ticket
 [![Downloads/week](https://img.shields.io/npm/dw/@thekarel/spiral.svg)](https://npmjs.org/package/@thekarel/spiral)
 
 <!-- toc -->
-
-- [Spiral](#spiral)
-- [API Key](#api-key)
-- [Usage](#usage)
-- [Commands](#commands)
+* [Spiral](#spiral)
+* [this will run](#this-will-run)
+* [API Key](#api-key)
+* [Usage](#usage)
+* [Commands](#commands)
 <!-- tocstop -->
 
 # API Key
@@ -36,57 +36,33 @@ Make sure you only add READ permissions.
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g @thekarel/spiral
 $ spiral COMMAND
 running command...
 $ spiral (--version)
-@thekarel/spiral/0.0.0 darwin-x64 node-v22.13.1
+@thekarel/spiral/0.0.0 linux-x64 node-v20.19.3
 $ spiral --help [COMMAND]
 USAGE
   $ spiral COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-- [`spiral hack ID`](#spiral-hack-id)
-- [`spiral help [COMMAND]`](#spiral-help-command)
-- [`spiral plugins`](#spiral-plugins)
-- [`spiral plugins add PLUGIN`](#spiral-plugins-add-plugin)
-- [`spiral plugins:inspect PLUGIN...`](#spiral-pluginsinspect-plugin)
-- [`spiral plugins install PLUGIN`](#spiral-plugins-install-plugin)
-- [`spiral plugins link PATH`](#spiral-plugins-link-path)
-- [`spiral plugins remove [PLUGIN]`](#spiral-plugins-remove-plugin)
-- [`spiral plugins reset`](#spiral-plugins-reset)
-- [`spiral plugins uninstall [PLUGIN]`](#spiral-plugins-uninstall-plugin)
-- [`spiral plugins unlink [PLUGIN]`](#spiral-plugins-unlink-plugin)
-- [`spiral plugins update`](#spiral-plugins-update)
-
-## `spiral hack ID`
-
-Start working on a ticket
-
-```
-USAGE
-  $ spiral hack ID
-
-ARGUMENTS
-  ID  The ticket ID, e.g. ABC-123
-
-DESCRIPTION
-  Start working on a ticket
-
-EXAMPLES
-  $ spiral hack
-```
-
-_See code: [src/commands/hack.ts](https://github.com/thekarel/spiral/blob/v0.0.0/src/commands/hack.ts)_
+* [`spiral help [COMMAND]`](#spiral-help-command)
+* [`spiral plugins`](#spiral-plugins)
+* [`spiral plugins add PLUGIN`](#spiral-plugins-add-plugin)
+* [`spiral plugins:inspect PLUGIN...`](#spiral-pluginsinspect-plugin)
+* [`spiral plugins install PLUGIN`](#spiral-plugins-install-plugin)
+* [`spiral plugins link PATH`](#spiral-plugins-link-path)
+* [`spiral plugins remove [PLUGIN]`](#spiral-plugins-remove-plugin)
+* [`spiral plugins reset`](#spiral-plugins-reset)
+* [`spiral plugins uninstall [PLUGIN]`](#spiral-plugins-uninstall-plugin)
+* [`spiral plugins unlink [PLUGIN]`](#spiral-plugins-unlink-plugin)
+* [`spiral plugins update`](#spiral-plugins-update)
 
 ## `spiral help [COMMAND]`
 
@@ -397,7 +373,6 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.45/src/commands/plugins/update.ts)_
-
 <!-- commandsstop -->
 
 ```
