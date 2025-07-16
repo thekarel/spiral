@@ -2,7 +2,7 @@
 
 > A tiny helper for Linear git workflow
 
-Offer no less than one feature:
+Offers no less than one feature:
 
 - Running `git town hack <branch-name>` where the branch is the ID + title from Linear
 
@@ -10,7 +10,11 @@ Example:
 
 ```sh
 $ spiral hack ABC-123
-# this will run
+```
+
+This will run
+
+```sh
 git town hack abc-123-the-title-of-your-ticket
 ```
 
