@@ -44,7 +44,7 @@ $ npm install -g @thekarel/spiral
 $ spiral COMMAND
 running command...
 $ spiral (--version)
-@thekarel/spiral/0.0.0 darwin-x64 node-v22.13.1
+@thekarel/spiral/0.0.1 linux-x64 node-v20.19.3
 $ spiral --help [COMMAND]
 USAGE
   $ spiral COMMAND
@@ -55,7 +55,6 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`spiral hack ID`](#spiral-hack-id)
 * [`spiral help [COMMAND]`](#spiral-help-command)
 * [`spiral plugins`](#spiral-plugins)
 * [`spiral plugins add PLUGIN`](#spiral-plugins-add-plugin)
@@ -67,29 +66,6 @@ USAGE
 * [`spiral plugins uninstall [PLUGIN]`](#spiral-plugins-uninstall-plugin)
 * [`spiral plugins unlink [PLUGIN]`](#spiral-plugins-unlink-plugin)
 * [`spiral plugins update`](#spiral-plugins-update)
-
-## `spiral hack ID`
-
-Start working on a ticket
-
-```
-USAGE
-  $ spiral hack ID [--dry]
-
-ARGUMENTS
-  ID  The ticket ID, e.g. ABC-123
-
-FLAGS
-  --dry  Show the shell command to run but do not execute it. Will still try to read from Linear.
-
-DESCRIPTION
-  Start working on a ticket
-
-EXAMPLES
-  $ spiral hack
-```
-
-_See code: [src/commands/hack.ts](https://github.com/thekarel/spiral/blob/v0.0.0/src/commands/hack.ts)_
 
 ## `spiral help [COMMAND]`
 
