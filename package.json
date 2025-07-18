@@ -41,7 +41,10 @@
   ],
   "homepage": "https://github.com/thekarel/spiral",
   "keywords": [
-    "oclif"
+    "oclif",
+    "linear",
+    "git",
+    "git-town"
   ],
   "license": "ISC",
   "main": "dist/index.js",
