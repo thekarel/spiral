@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@inquirer/prompts':
+        specifier: ^7.6.0
+        version: 7.6.0(@types/node@18.19.119)
       '@linear/sdk':
         specifier: ^51.1.0
         version: 51.1.0
