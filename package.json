@@ -1,7 +1,7 @@
 {
   "name": "@thekarel/spiral",
   "description": "A tiny helper for Linear git workflow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Charles Szilagyi",
   "bin": {
     "spiral": "./bin/run.js"
