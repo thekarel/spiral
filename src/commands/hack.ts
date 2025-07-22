@@ -1,4 +1,5 @@
 import {Args, Command, Flags} from '@oclif/core'
+import slugify from '@sindresorhus/slugify'
 import shell from 'shelljs'
 
 import {getLinearClient} from '../get-linear-client.js'
@@ -27,7 +28,9 @@ export default class Hack extends Command {
 
     const ticket = await linearClient.issue(id)
 
-    const branch = `${ticket.identifier.toLocaleLowerCase()}-${ticket.title.replaceAll(/\s+/g, '-').toLowerCase()}`
+    const branch = slugify(
+      `${ticket.identifier.toLocaleLowerCase()}-${ticket.title.replaceAll(/\s+/g, '-').toLowerCase()}`,
+    )
 
     const command = `git town hack ${branch}`
     this.log(`The following command ${flags.dry ? 'would' : 'will'} be executed:\n`)
