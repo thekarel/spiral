@@ -77,7 +77,7 @@ $ npm install -g @thekarel/spiral
 $ spiral COMMAND
 running command...
 $ spiral (--version)
-@thekarel/spiral/0.1.0 linux-x64 node-v20.19.3
+@thekarel/spiral/0.1.1 linux-x64 node-v20.19.3
 $ spiral --help [COMMAND]
 USAGE
   $ spiral COMMAND
