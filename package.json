@@ -63,7 +63,7 @@
   "repository": "thekarel/spiral",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
-    "lint": "eslint",
+    "lint": "eslint --cache",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
     "prepack": "oclif manifest && oclif readme",

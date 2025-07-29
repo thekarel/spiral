@@ -14,6 +14,11 @@ export const env = () => {
     shell.exit(1)
   }
 
+  if (!shell.which('git-town')) {
+    shell.echo(`This tool requires git town but it doesn't seem to be installed`)
+    shell.exit(1)
+  }
+
   _env = {
     linearApiKey: process.env.LINEAR_API_KEY,
   }

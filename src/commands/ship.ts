@@ -7,6 +7,8 @@ import openEditor from 'open-editor'
 import shell from 'shelljs'
 import colors from 'yoctocolors'
 
+import {extractTicketIdFromBranch} from '../branch/extractTicketIdFromBranch.js'
+import {getCurrentBranchName} from '../branch/getCurrentBranchName.js'
 import {getLinearClient} from '../get-linear-client.js'
 
 export default class Ship extends Command {
@@ -35,17 +37,9 @@ export default class Ship extends Command {
 
     const linearClient = getLinearClient()
 
-    // Get current git branch name
-    const branchResult = shell.exec('git branch --show-current', {silent: true})
-    if (branchResult.code !== 0) {
-      this.error('Failed to get current git branch')
-    }
-
-    const branchName = branchResult.stdout.trim()
-    const ticketIdMatch = branchName.match(/^([a-zA-Z]+-\d+)-/)
-    const id = ticketIdMatch?.[1]
+    const id = extractTicketIdFromBranch(getCurrentBranchName())
     if (!id) {
-      this.error(`Cannot find ticket ID in branch name: ${branchName}`)
+      this.error(`Cannot find ticket ID in branch name`)
     }
 
     const ticket = await linearClient.issue(id)
