@@ -76,6 +76,11 @@ ${ticket.url}
       fs.rmSync(tempDirPath, {force: true, recursive: true})
     }
 
+    if (isEmpty(message)) {
+      this.log('No commit message provided, exiting')
+      this.exit(0)
+    }
+
     const command = `git town ship -m "${message}"`
 
     this.log(`The following command will be executed:`)
@@ -95,3 +100,5 @@ ${ticket.url}
     }
   }
 }
+
+const isEmpty = (str: string) => str.trim().length === 0
