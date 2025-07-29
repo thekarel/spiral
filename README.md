@@ -77,7 +77,7 @@ $ npm install -g @thekarel/spiral
 $ spiral COMMAND
 running command...
 $ spiral (--version)
-@thekarel/spiral/0.1.2 linux-x64 node-v20.19.3
+@thekarel/spiral/0.1.3 darwin-x64 node-v22.13.1
 $ spiral --help [COMMAND]
 USAGE
   $ spiral COMMAND
@@ -88,7 +88,50 @@ USAGE
 # Commands
 
 <!-- commands -->
+* [`spiral branch`](#spiral-branch)
+* [`spiral hack ID`](#spiral-hack-id)
 * [`spiral help [COMMAND]`](#spiral-help-command)
+* [`spiral ship`](#spiral-ship)
+
+## `spiral branch`
+
+Print the current git branch name
+
+```
+USAGE
+  $ spiral branch
+
+DESCRIPTION
+  Print the current git branch name
+
+EXAMPLES
+  $ spiral branch
+```
+
+_See code: [src/commands/branch.ts](https://github.com/thekarel/spiral/blob/v0.1.3/src/commands/branch.ts)_
+
+## `spiral hack ID`
+
+Create a new branch for a ticket (git hack)
+
+```
+USAGE
+  $ spiral hack ID [--dry]
+
+ARGUMENTS
+  ID  The ticket ID, e.g. ABC-123
+
+FLAGS
+  --dry  Show the shell command to run but do not execute it. Will still try to read from Linear.
+
+DESCRIPTION
+  Create a new branch for a ticket (git hack)
+
+EXAMPLES
+  $ spiral hack ABC-123
+```
+
+_See code: [src/commands/hack.ts](https://github.com/thekarel/spiral/blob/v0.1.3/src/commands/hack.ts)_
 
 ## `spiral help [COMMAND]`
 
@@ -109,4 +152,27 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.31/src/commands/help.ts)_
+
+## `spiral ship`
+
+Ship your work to the remote repo (git ship)
+
+```
+USAGE
+  $ spiral ship [--confirm] [--edit] [--scope <value>]
+
+FLAGS
+  --confirm        Ask for confirmation before executing the command (default: false)
+  --[no-]edit      Edit the commit message before committing. Otherwise it's auto generated (default: true)
+  --scope=<value>  [default: fix] Scope of the commit, e.g. "feature" or "fix(Admin)", will be used as the commit
+                   message prefix (default: "fix")
+
+DESCRIPTION
+  Ship your work to the remote repo (git ship)
+
+EXAMPLES
+  $ spiral ship
+```
+
+_See code: [src/commands/ship.ts](https://github.com/thekarel/spiral/blob/v0.1.3/src/commands/ship.ts)_
 <!-- commandsstop -->
