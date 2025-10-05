@@ -7,18 +7,36 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write        # needed to mint OIDC tokens for attestations
+      attestations: write    # needed to upload provenance
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: latest
+          registry-url: 'https://registry.npmjs.org'
       - uses: pnpm/action-setup@v4
         with:
           version: latest
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm run prepack
-      - uses: JS-DevTools/npm-publish@19c28f1ef146469e409470805ea4279d47c3d35c
+      - name: Pack npm package
+        id: pack
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          pnpm pack
+          TARBALL="thekarel-spiral-${VERSION}.tgz"
+          echo "TARBALL_PATH=$TARBALL" >> $GITHUB_ENV
+          echo "Created package: $TARBALL"
+      - name: Generate build provenance attestation
+        uses: actions/attest-build-provenance@v3
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          subject-path: ${{ env.TARBALL_PATH }}
+      - name: Publish to npm
+        run: pnpm publish ${{ env.TARBALL_PATH }} --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: pnpm run postpack
