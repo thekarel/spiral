@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write        # needed to mint OIDC tokens for attestations
-      attestations: write    # needed to upload provenance
+      id-token: write # needed to mint OIDC tokens for attestations
+      attestations: write # needed to upload provenance
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

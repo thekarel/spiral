@@ -1,20 +1,8 @@
 # Spiral
 
+[![Attestations](https://img.shields.io/badge/Attestations-00aa00)](https://github.com/thekarel/spiral/attestations)
+
 > A tiny helper for Linear & Git Town workflow
-
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/@thekarel/spiral.svg)](https://npmjs.org/package/@thekarel/spiral)
-[![Downloads/week](https://img.shields.io/npm/dw/@thekarel/spiral.svg)](https://npmjs.org/package/@thekarel/spiral)
-
-<!-- toc -->
-* [Spiral](#spiral)
-* [Installation](#installation)
-* [Hack](#hack)
-* [Ship](#ship)
-* [API Key](#api-key)
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
 
 # Installation
 
@@ -22,7 +10,32 @@
 npm install -g @thekarel/spiral
 ```
 
-## What is this?
+This will give you a CLI command named `spiral`.
+
+You can also try using
+
+```
+npx @thekarel/spiral
+```
+
+## Linear API Key
+
+Export your API key as `LINEAR_API_KEY`.
+
+You can create one in your Linear account settings under Security & access.
+Only add READ permissions.
+
+## Git Town
+
+Git Town needs to be installed.
+
+## Package Verification
+
+This package is built with GitHub Actions and signed with artifact attestations for supply chain security.
+
+See https://github.com/thekarel/spiral/attestations
+
+# What is this?
 
 This tool slightly simplifies a very specific and repetitive workflow:
 
@@ -31,82 +44,56 @@ This tool slightly simplifies a very specific and repetitive workflow:
 3. Fill the commit message with the ticket information from Linear
 4. Publish the changes in a sane way using Git Town
 
-If you've been doing `git hack` and `git town` often you know what I mean.
+If you've been doing `git town hack` and `git town ship` often you know what I mean.
 
 The CLI has two commands:
 
-1. `spiral hack abc-123`: Create a new branch from a Linear ticket using `git town hack`
+1. `spiral hack abc-123`: Create a new branch like `abc-123-title-of-ticket` from a Linear ticket number
 2. `spiral ship`: Pre-fill the commit message with the ticket information and run `git town ship`
 
-The format of the branch name and the commit message structure are hard coded, and so are the commands this CLI runs.
-This might change in the future.
+# Commands
 
-Context:
+## hack
 
-- Linear: https://linear.app/
-- Git Town: https://git-town.com/
+The `hack` command creates a new branch by reading the ticket title from the provided ticket number/id.
 
-# Hack
-
-The `hack` command creates a new branch from a Linear ticket, using Git Town.
 The format of the branch name is `ticket-number-title-of-your-ticket`, for example `abc-123-exciting-the-new-feature`.
 
-Keystrokes saved: several!
+Benefit: no need to hunt for the branch name in Linear or type it in manually.
+It's enough to remember the ticket number, the prefix is usually well known already.
 
-# Ship
+Example:
+
+```sh
+# spiral hack --help
+spiral hack abc-123
+```
+
+## ship
 
 The `ship` command pre-fills the commit message with the ticket information,
 allows you to edit the message and then runs `git town ship`.
 
-The goal is to avoid copy-pasting all the bits and manually formatting the commit message into the expected format.
-
-Productivity increase: not insignificant!
-
-# API Key
-
-Export your API key as `LINEAR_API_KEY`.
-
-You can create one in your Linear account settings under Security & access.
-Only add READ permissions.
-
-# Usage
-
-<!-- usage -->
-```sh-session
-$ npm install -g @thekarel/spiral
-$ spiral COMMAND
-running command...
-$ spiral (--version)
-@thekarel/spiral/0.1.3 linux-x64 node-v20.19.4
-$ spiral --help [COMMAND]
-USAGE
-  $ spiral COMMAND
-...
-```
-<!-- usagestop -->
-
-# Commands
-
-<!-- commands -->
-* [`spiral help [COMMAND]`](#spiral-help-command)
-
-## `spiral help [COMMAND]`
-
-Display help for spiral.
+By default the commit message looks like this:
 
 ```
-USAGE
-  $ spiral help [COMMAND...] [-n]
+fix: Title of your ticket (abc-123)
 
-ARGUMENTS
-  COMMAND...  Command to show help for.
+Fixes abc-123
 
-FLAGS
-  -n, --nested-commands  Include all nested commands in the output.
-
-DESCRIPTION
-  Display help for spiral.
+https://link-to-your-ticket
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.31/src/commands/help.ts)_
-<!-- commandsstop -->
+Benefit: avoid copy-pasting all the bits and manually formatting the commit message into the expected format.
+
+Example:
+
+```sh
+# spiral ship --help
+spiral ship
+```
+
+# Context:
+
+- Linear: https://linear.app/
+- Git Town: https://git-town.com/
