@@ -66,8 +66,7 @@
     "lint": "eslint --cache",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
-    "prepack": "oclif manifest && oclif readme",
-    "version": "oclif readme && git add README.md"
+    "prepack": "oclif manifest"
   },
   "types": "dist/index.d.ts"
 }
