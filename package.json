@@ -1,7 +1,7 @@
 {
   "name": "@thekarel/spiral",
   "description": "A tiny helper for Linear git workflow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Charles Szilagyi",
   "bin": {
     "spiral": "./bin/run.js"
@@ -16,6 +16,7 @@
     "@sindresorhus/slugify": "^2.2.1",
     "open-editor": "^5.1.0",
     "shelljs": "^0.10.0",
+    "yaml": "^2.8.1",
     "yoctocolors": "^2.1.1"
   },
   "devDependencies": {
@@ -62,7 +63,9 @@
   },
   "repository": "thekarel/spiral",
   "scripts": {
-    "build": "shx rm -rf dist && tsc -b",
+    "dev": "pnpm link --global && pnpm clean && tsc --build --watch ",
+    "clean": "shx rm -rf dist",
+    "build": "pnpm clean && tsc --build",
     "lint": "eslint --cache",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",

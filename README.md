@@ -46,10 +46,16 @@ This tool slightly simplifies a very specific and repetitive workflow:
 
 If you've been doing `git town hack` and `git town ship` often you know what I mean.
 
-The CLI has two commands:
+The CLI has the following commands:
 
 1. `spiral hack abc-123`: Create a new branch like `abc-123-title-of-ticket` from a Linear ticket number
 2. `spiral ship`: Pre-fill the commit message with the ticket information and run `git town ship`
+3. `spiral init`: Creates an empty config file called `spiral.yaml` if no config exitst yet (config file is completely optional)
+
+# Config file
+
+You can have a config file at `.spiral.yaml`, `spiral.yaml` or at `process.env.SPIRAL_CONFIG_FILE`.
+See the `spiral.yaml.example` file for explanation.
 
 # Commands
 

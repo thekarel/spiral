@@ -14,3 +14,6 @@ package-lock.json
 
 tsconfig.tsbuildinfo
 .eslintcache
+
+.spiral.yaml
+spiral.yaml

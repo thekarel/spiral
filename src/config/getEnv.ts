@@ -1,10 +1,6 @@
 import shell from 'shelljs'
 
-let _env: null | {linearApiKey: string} = null
-
-export const env = () => {
-  if (_env) return _env
-
+export const getEnv = () => {
   if (!process.env.LINEAR_API_KEY) {
     throw new Error('LINEAR_API_KEY environment variable is not set')
   }
@@ -19,9 +15,7 @@ export const env = () => {
     shell.exit(1)
   }
 
-  _env = {
+  return {
     linearApiKey: process.env.LINEAR_API_KEY,
   }
-
-  return _env
 }

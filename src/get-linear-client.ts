@@ -1,5 +1,3 @@
-import { LinearClient } from "@linear/sdk";
+import {LinearClient} from '@linear/sdk'
 
-import { env } from "./env.js";
-
-export const getLinearClient = () => new LinearClient({ apiKey: env().linearApiKey })
+export const getLinearClient = (apiKey: string) => new LinearClient({apiKey})

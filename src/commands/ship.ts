@@ -9,6 +9,7 @@ import colors from 'yoctocolors'
 
 import {extractTicketIdFromBranch} from '../branch/extractTicketIdFromBranch.js'
 import {getCurrentBranchName} from '../branch/getCurrentBranchName.js'
+import {loadConfig} from '../config/loadConfig.js'
 import {getLinearClient} from '../get-linear-client.js'
 
 export default class Ship extends Command {
@@ -34,8 +35,9 @@ export default class Ship extends Command {
 
   public async run(): Promise<void> {
     const {flags} = await this.parse(Ship)
+    const config = loadConfig()
 
-    const linearClient = getLinearClient()
+    const linearClient = getLinearClient(config.linearApiKey)
 
     const id = extractTicketIdFromBranch(getCurrentBranchName())
     if (!id) {

@@ -1,8 +1,11 @@
+/* eslint-disable perfectionist/sort-imports */
 import {Args, Command, Flags} from '@oclif/core'
 import shell from 'shelljs'
 
 import {createBranchName} from '../branch/createBranchName.js'
 import {getLinearClient} from '../get-linear-client.js'
+
+import {loadConfig} from '../config/loadConfig.js'
 
 export default class Hack extends Command {
   static override args = {
@@ -22,9 +25,15 @@ export default class Hack extends Command {
 
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Hack)
-    const {id} = args
+    let {id} = args
 
-    const linearClient = getLinearClient()
+    // Apply prefix from config if it exists and ID doesn't already have it
+    const config = loadConfig()
+    if (config.prefix && !id.startsWith(config.prefix)) {
+      id = `${config.prefix}${id}`
+    }
+
+    const linearClient = getLinearClient(config.linearApiKey)
 
     const ticket = await linearClient.issue(id)
 

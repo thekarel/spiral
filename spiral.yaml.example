@@ -1,0 +1,8 @@
+# This is the config file for Spiral, a tiny helper for Linear & Git Town
+# https://github.com/thekarel/spiral
+# Install it with
+# npm install -g @thekarel/spiral
+
+# prefix: If present, it will be perpended to the ticket number.
+# For example, setting `prefix: acme-` allows you to write `spiral hack 123` instead of `spiral hack acme-123`.
+prefix: acme-
