@@ -109,3 +109,7 @@ spiral ship
 
 - Linear: https://linear.app/
 - Git Town: https://git-town.com/
+
+# Demo
+
+![Demo](https://raw.githubusercontent.com/thekarel/spiral/main/spiral.png)
