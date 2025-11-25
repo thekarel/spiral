@@ -1,8 +1,15 @@
 # Spiral
 
+> A tiny helper for Linear & Git Town workflow
+
+# Package Verification
+
 [![Attestations](https://img.shields.io/badge/Attestations-00aa00)](https://github.com/thekarel/spiral/attestations)
 
-> A tiny helper for Linear & Git Town workflow
+This project is built with GitHub Actions and signed with artifact attestations for supply chain security.
+
+- https://github.com/thekarel/spiral/attestations
+- https://www.npmjs.com/package/@thekarel/spiral#provenance-details-header
 
 # Installation
 
@@ -23,17 +30,14 @@ npx @thekarel/spiral
 Export your API key as `LINEAR_API_KEY`.
 
 You can create one in your Linear account settings under Security & access.
-Only add READ permissions.
+Permissions to add:
+
+- by default you can just use a read-only token,
+- if you want to use the status update feature, you need to add the "Read" and "Write all data" permissions (but not admin)
 
 ## Git Town
 
 Git Town needs to be installed.
-
-## Package Verification
-
-This package is built with GitHub Actions and signed with artifact attestations for supply chain security.
-
-See https://github.com/thekarel/spiral/attestations
 
 # What is this?
 
@@ -55,7 +59,7 @@ The CLI has the following commands:
 # Config file
 
 You can have a config file at `.spiral.yaml`, `spiral.yaml` or at `process.env.SPIRAL_CONFIG_FILE`.
-See the `spiral.yaml.example` file for explanation.
+See the [config example](spiral.yaml.example) for all options.
 
 # Commands
 
@@ -74,6 +78,8 @@ Example:
 # spiral hack --help
 spiral hack abc-123
 ```
+
+See the [config example](spiral.yaml.example) for more options.
 
 ## ship
 

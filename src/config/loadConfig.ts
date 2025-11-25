@@ -2,10 +2,16 @@ import fs from 'node:fs'
 import process from 'node:process'
 import {parse} from 'yaml'
 
-import type {AppConfig} from './AppConfig.js'
-
 import {getConfigPath} from './getConfigPath.js'
 import {getEnv} from './getEnv.js'
+
+interface AppConfig {
+  hack?: {
+    status?: string
+  }
+  linearApiKey: string
+  prefix?: string
+}
 
 /**
  * Loads configuration from a YAML file
@@ -14,7 +20,9 @@ import {getEnv} from './getEnv.js'
  */
 export function loadConfig(): AppConfig {
   const _env = getEnv()
-  const config = {..._env}
+  const config = {
+    linearApiKey: _env.linearApiKey,
+  }
 
   const configPath = getConfigPath(process.cwd())
 

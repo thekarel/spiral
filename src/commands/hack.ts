@@ -6,6 +6,7 @@ import {createBranchName} from '../branch/createBranchName.js'
 import {getLinearClient} from '../get-linear-client.js'
 
 import {loadConfig} from '../config/loadConfig.js'
+import {Issue} from '@linear/sdk'
 
 export default class Hack extends Command {
   static override args = {
@@ -26,16 +27,21 @@ export default class Hack extends Command {
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Hack)
     let {id} = args
+    const config = loadConfig()
 
     // Apply prefix from config if it exists and ID doesn't already have it
-    const config = loadConfig()
     if (config.prefix && !id.startsWith(config.prefix)) {
       id = `${config.prefix}${id}`
     }
 
     const linearClient = getLinearClient(config.linearApiKey)
 
-    const ticket = await linearClient.issue(id)
+    let ticket: Issue
+    try {
+      ticket = await linearClient.issue(id)
+    } catch (error) {
+      this.error(`Failed to fetch ticket with ID ${id}: ${error}`)
+    }
 
     const branch = createBranchName(ticket.identifier, ticket.title)
 
@@ -50,6 +56,28 @@ export default class Hack extends Command {
     const result = shell.exec(command)
     if (result.code !== 0) {
       this.error(result.stderr)
+    }
+
+    if (config.hack?.status) {
+      const statusName = config.hack.status
+      this.log(`Updating ticket status to ${config.hack.status}`)
+      try {
+        // Get the team and its workflow states
+        const team = await ticket.team
+        const states = await team?.states()
+
+        // Find the state by name (case-insensitive)
+        const targetState = states?.nodes.find((state) => state.name.toLowerCase() === statusName.toLowerCase())
+
+        if (!targetState) {
+          this.error(`State "${config.hack.status}" not found in team "${team?.name}"`)
+        }
+
+        await linearClient.updateIssue(ticket.id, {stateId: targetState.id})
+        this.log(`✓ Updated status to "${targetState.name}"`)
+      } catch (error) {
+        this.error(`Failed to update ticket status: ${error}`)
+      }
     }
   }
 }

@@ -6,3 +6,8 @@
 # prefix: If present, it will be perpended to the ticket number.
 # For example, setting `prefix: acme-` allows you to write `spiral hack 123` instead of `spiral hack acme-123`.
 prefix: acme-
+
+# Options related to the `hack` command
+hack:
+  # status: Will try to move the relevant ticket into this status after creating the new branch.
+  status: "In Progress"
