@@ -62,7 +62,10 @@
     "topicSeparator": " ",
     "topics": {}
   },
-  "repository": "thekarel/spiral",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thekarel/spiral"
+  },
   "scripts": {
     "dev": "pnpm link --global && pnpm clean && tsc --build --watch ",
     "clean": "shx rm -rf dist",
