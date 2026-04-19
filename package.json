@@ -39,7 +39,8 @@
   "files": [
     "./bin",
     "./dist",
-    "./oclif.manifest.json"
+    "./oclif.manifest.json",
+    "./spiral.yaml.example"
   ],
   "homepage": "https://github.com/thekarel/spiral",
   "keywords": [
