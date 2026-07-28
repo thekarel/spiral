@@ -1,7 +1,7 @@
 {
   "name": "@thekarel/spiral",
   "description": "A tiny helper for Linear git workflow",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Charles Szilagyi",
   "bin": {
     "spiral": "./bin/run.js"
@@ -10,7 +10,7 @@
   "bugs": "https://github.com/thekarel/spiral/issues",
   "dependencies": {
     "@inquirer/prompts": "^7.6.0",
-    "@linear/sdk": "^51.1.0",
+    "@linear/sdk": "^88.3.0",
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
     "@sindresorhus/slugify": "^2.2.1",
