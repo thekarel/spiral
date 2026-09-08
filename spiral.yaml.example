@@ -11,3 +11,9 @@ prefix: acme-
 hack:
   # status: Will try to move the relevant ticket into this status after creating the new branch.
   status: "In Progress"
+
+# Options related to the `ship` command
+ship:
+  # status: Will try to move the relevant ticket into this status after shipping.
+  # Can be overridden with `spiral ship --status "Done"`.
+  status: "Done"

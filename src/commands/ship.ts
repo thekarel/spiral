@@ -11,6 +11,7 @@ import {extractTicketIdFromBranch} from '../branch/extractTicketIdFromBranch.js'
 import {getCurrentBranchName} from '../branch/getCurrentBranchName.js'
 import {loadConfig} from '../config/loadConfig.js'
 import {getLinearClient} from '../get-linear-client.js'
+import {updateTicketStatus} from '../updateTicketStatus.js'
 
 export default class Ship extends Command {
   static override args = {}
@@ -30,6 +31,9 @@ export default class Ship extends Command {
       default: 'fix',
       description:
         'Scope of the commit, e.g. "feature" or "fix(Admin)", will be used as the commit message prefix (default: "fix")',
+    }),
+    status: Flags.string({
+      description: 'Move the ticket into this Linear status after shipping (overrides config ship.status)',
     }),
   }
 
@@ -99,6 +103,17 @@ ${ticket.url}
     const result = shell.exec(command)
     if (result.code !== 0) {
       this.error(result.stderr)
+    }
+
+    const status = flags.status ?? config.ship?.status
+    if (status) {
+      this.log(`Updating ticket status to ${status}`)
+      try {
+        const stateName = await updateTicketStatus(linearClient, ticket, status)
+        this.log(`✓ Updated status to "${stateName}"`)
+      } catch (error) {
+        this.error(`Failed to update ticket status: ${error}`)
+      }
     }
   }
 }

@@ -105,6 +105,15 @@ Example:
 spiral ship
 ```
 
+After a successful ship the ticket can be moved into a status, either from the config file
+(`ship.status`) or with the flag, which takes precedence:
+
+```sh
+spiral ship --status "Done"
+```
+
+See the [config example](spiral.yaml.example) for more options.
+
 # Context:
 
 - Linear: https://linear.app/

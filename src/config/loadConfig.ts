@@ -11,6 +11,9 @@ interface AppConfig {
   }
   linearApiKey: string
   prefix?: string
+  ship?: {
+    status?: string
+  }
 }
 
 /**

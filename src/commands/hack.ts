@@ -6,6 +6,7 @@ import {createBranchName} from '../branch/createBranchName.js'
 import {getLinearClient} from '../get-linear-client.js'
 
 import {loadConfig} from '../config/loadConfig.js'
+import {updateTicketStatus} from '../updateTicketStatus.js'
 import {Issue} from '@linear/sdk'
 
 export default class Hack extends Command {
@@ -21,6 +22,9 @@ export default class Hack extends Command {
     dry: Flags.boolean({
       default: false,
       description: 'Show the shell command to run but do not execute it. Will still try to read from Linear.',
+    }),
+    status: Flags.string({
+      description: 'Move the ticket into this Linear status after creating the branch (overrides config hack.status)',
     }),
   }
 
@@ -58,23 +62,12 @@ export default class Hack extends Command {
       this.error(result.stderr)
     }
 
-    if (config.hack?.status) {
-      const statusName = config.hack.status
-      this.log(`Updating ticket status to ${config.hack.status}`)
+    const status = flags.status ?? config.hack?.status
+    if (status) {
+      this.log(`Updating ticket status to ${status}`)
       try {
-        // Get the team and its workflow states
-        const team = await ticket.team
-        const states = await team?.states()
-
-        // Find the state by name (case-insensitive)
-        const targetState = states?.nodes.find((state) => state.name.toLowerCase() === statusName.toLowerCase())
-
-        if (!targetState) {
-          this.error(`State "${config.hack.status}" not found in team "${team?.name}"`)
-        }
-
-        await linearClient.updateIssue(ticket.id, {stateId: targetState.id})
-        this.log(`✓ Updated status to "${targetState.name}"`)
+        const stateName = await updateTicketStatus(linearClient, ticket, status)
+        this.log(`✓ Updated status to "${stateName}"`)
       } catch (error) {
         this.error(`Failed to update ticket status: ${error}`)
       }
